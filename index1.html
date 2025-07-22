@@ -49,18 +49,8 @@
   <script>
     function checkPassword() {
       const pw = document.getElementById("pw").value.trim();
-      if (pw === "tombo21") {
-        const path = window.location.pathname;
-
-        let target = "/fukashi21/tombo21.html"; // デフォルト
-
-        if (path.includes("news")) {
-          target = "/fukashi21/news.html";
-        } else if (path.includes("essay")) {
-          target = "/fukashi21/essay.html";
-        }
-
-        location.href = target;
+      if (pw && /^[a-zA-Z0-9_-]+$/.test(pw)) {
+        location.href = pw + ".html";
       } else {
         alert("正しいパスワードを入力してください");
       }
@@ -71,7 +61,7 @@
   <div class="notice">
     <strong>ここから先はパスワード要エリアです。</strong><br>
     （ヒント：以前と同じ虫と数字）<br><br>
-    パスワードのわからない人はホームページ管理人まで問い合わせてください。<br>
+    ＰＷのわからない人はホームページ管理人まで問い合わせて、<br>
     エラーの場合はブラウザーの戻るボタン（←）で戻ってください。
   </div>
 

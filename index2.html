@@ -50,17 +50,22 @@
     function checkPassword() {
       const pw = document.getElementById("pw").value.trim();
       if (pw === "tombo21") {
+        // 今いるディレクトリのパスを取得
         const path = window.location.pathname;
+        // 最後のスラッシュで終わらせる
+        const basePath = path.endsWith("/") ? path : path.substring(0, path.lastIndexOf("/") + 1);
 
-        let target = "/fukashi21/tombo21.html"; // デフォルト
-
-        if (path.includes("news")) {
-          target = "/fukashi21/news.html";
-        } else if (path.includes("essay")) {
-          target = "/fukashi21/essay.html";
+        // ファイル名をディレクトリに応じて変える
+        let filename = "";
+        if (basePath.includes("tombo21_news")) {
+          filename = "tombo21_news.html";
+        } else if (basePath.includes("essay")) {
+          filename = "essay.html";
+        } else {
+          filename = "tombo21.html"; // デフォルト
         }
 
-        location.href = target;
+        location.href = basePath + filename;
       } else {
         alert("正しいパスワードを入力してください");
       }
