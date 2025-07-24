@@ -70,16 +70,20 @@
         return;
       }
 
+      // fukashi21/pw_protect/index.html → root = fukashi21
       const pathParts = window.location.pathname.split("/").filter(Boolean);
-      const currentDir = pathParts[pathParts.length - 2] || "";  // index.html の1つ上のディレクトリ
+      const root = pathParts[0];          // 'fukashi21'
+      const currentDir = pathParts[1];    // 'pw_protect'
 
-      // トークンチェック（相対パスで）
-      fetch("tombo21.html", { method: "HEAD" })
+      // トークンファイルの存在チェック（HEADで）
+      fetch(`/${root}/pw_protect/tombo21.html`, { method: 'HEAD' })
         .then(res => {
           if (!res.ok) throw new Error();
 
-          const targetPage = `${currentDir}.html`;  // essay → essay.html, etc.
-          window.location.href = targetPage;
+          // 自分がルートindexなら → pw_protect.html
+          // サブディレクトリindexなら → essay.html / news.html など
+          const target = `${currentDir}.html`;
+          window.location.href = `/${root}/${target}`;
         })
         .catch(() => {
           alert("認証エラー：保護ファイルが見つかりません。");
