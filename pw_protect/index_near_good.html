@@ -48,7 +48,6 @@
   </style>
 </head>
 <body>
-
   <div class="notice">
     <strong>ここから先は同期生限定エリアです。</strong><br>
     （ヒント：以前と同じ虫と数字）<br><br>
@@ -62,25 +61,36 @@
   </div>
 
   <script>
-    // クエリパラメータ 'target' で遷移先を受け取る
-    const params = new URLSearchParams(location.search);
-    // パラメータがなければデフォルトは 同期生エリアトップ(pw_protect.html)
-    const target = params.get('target') || 'pw_protect.html';
-
     function checkPassword() {
       const pw = document.getElementById("pw").value.trim().toLowerCase();
-      if (pw === "album" ||
-          pw === "essay" ||
-          pw === "news" ||
-          pw === "nishiho" ||
-          pw === "others" ||
-          pw === "reunion" ||
-          pw === "thread" ||
-          pw === "tombo21") {
-        // パスワードが正しければ、query で指定されたページへ
-        location.href = target;
-      } else {
-        alert("パスワードが間違っています。");
+
+      switch (pw) {
+        case "album":
+          location.href = "album/index.html";
+          break;
+        case "essay":
+          location.href = "essay/index.html";
+          break;
+        case "news":
+          location.href = "news/index.html";
+          break;
+        case "nishiho":
+          location.href = "nishiho/index.html";
+          break;
+        case "others":
+          location.href = "others/index.html";
+          break;
+        case "reunion":
+          location.href = "reunion/index.html";
+          break;
+        case "thread":
+          location.href = "thread/index.html";
+          break;
+        case "tombo21":
+          location.href = "tombo21.html";
+          break;
+        default:
+          alert("パスワードが間違っています。");
       }
     }
   </script>
@@ -88,6 +98,5 @@
   <noscript>
     JavaScriptを有効にしてください。
   </noscript>
-
 </body>
 </html>
