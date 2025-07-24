@@ -64,32 +64,25 @@
 
   <script>
     function checkPassword() {
-      const pw = document.getElementById("pw").value;
-      const correctPW = "tombo21";
-      if (pw !== correctPW) {
+      const input = document.getElementById("pw").value.trim();
+      if (input !== "tombo21") {
         alert("パスワードが違います。");
         return;
       }
 
-      // ルートパスを取得（例: https://example.com/fukashi21/）
-      const loc = window.location;
-      const pathParts = loc.pathname.split("/").filter(Boolean);
+      // fukashi21/pw_protect/index.html → root = fukashi21
+      const pathParts = window.location.pathname.split("/").filter(Boolean);
+      const root = pathParts[0];          // 'fukashi21'
+      const currentDir = pathParts[1];    // 'pw_protect'
 
-      // 最上位のルート（たとえば 'fukashi21'）を取得
-      const root = pathParts.length > 0 ? pathParts[0] : "";
+      // トークンファイルの存在チェック（HEADで）
+      fetch(`/${root}/pw_protect/tombo21.html`, { method: 'HEAD' })
+        .then(res => {
+          if (!res.ok) throw new Error();
 
-      // 自分自身のディレクトリ（最後のディレクトリ名）を取得
-      const currentDir = pathParts.length > 1 ? pathParts[pathParts.length - 2] : "";
-
-      // tombo21.html の存在確認
-      fetch(`/${root}/tombo21.html`, { method: 'HEAD' })
-        .then(response => {
-          if (!response.ok) throw new Error("tombo21.html not found");
-          
-          // 自分がルート index.html なら → fukashi21.html
-          // 子ディレクトリ内の index.html なら → news.html のようにリダイレクト
-          const isRootIndex = currentDir === "" || currentDir === root;
-          const target = isRootIndex ? `${root}.html` : `${currentDir}.html`;
+          // 自分がルートindexなら → pw_protect.html
+          // サブディレクトリindexなら → essay.html / news.html など
+          const target = `${currentDir}.html`;
           window.location.href = `/${root}/${target}`;
         })
         .catch(() => {

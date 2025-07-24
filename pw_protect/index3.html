@@ -46,26 +46,6 @@
       background-color: #5aa268;
     }
   </style>
-  <script>
-    function checkPassword() {
-      const pw = document.getElementById("pw").value.trim();
-      if (pw === "tombo21") {
-        const path = window.location.pathname;
-
-        let target = "/fukashi21/tombo21.html"; // デフォルト
-
-        if (path.includes("news")) {
-          target = "/fukashi21/news.html";
-        } else if (path.includes("essay")) {
-          target = "/fukashi21/essay.html";
-        }
-
-        location.href = target;
-      } else {
-        alert("正しいパスワードを入力してください");
-      }
-    }
-  </script>
 </head>
 <body>
   <div class="notice">
@@ -81,5 +61,41 @@
   </div>
 
   <noscript>JavaScriptを有効にしてください。</noscript>
+
+  <script>
+    function checkPassword() {
+      const pw = document.getElementById("pw").value;
+      const correctPW = "tombo21";
+      if (pw !== correctPW) {
+        alert("パスワードが違います。");
+        return;
+      }
+
+      // ルートパスを取得（例: https://example.com/fukashi21/）
+      const loc = window.location;
+      const pathParts = loc.pathname.split("/").filter(Boolean);
+
+      // 最上位のルート（たとえば 'fukashi21'）を取得
+      const root = pathParts.length > 0 ? pathParts[0] : "";
+
+      // 自分自身のディレクトリ（最後のディレクトリ名）を取得
+      const currentDir = pathParts.length > 1 ? pathParts[pathParts.length - 2] : "";
+
+      // tombo21.html の存在確認
+      fetch(`/${root}/tombo21.html`, { method: 'HEAD' })
+        .then(response => {
+          if (!response.ok) throw new Error("tombo21.html not found");
+          
+          // 自分がルート index.html なら → fukashi21.html
+          // 子ディレクトリ内の index.html なら → news.html のようにリダイレクト
+          const isRootIndex = currentDir === "" || currentDir === root;
+          const target = isRootIndex ? `${root}.html` : `${currentDir}.html`;
+          window.location.href = `/${root}/${target}`;
+        })
+        .catch(() => {
+          alert("認証エラー：保護ファイルが見つかりません。");
+        });
+    }
+  </script>
 </body>
 </html>
