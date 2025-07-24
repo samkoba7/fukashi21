@@ -1,93 +1,41 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>同期生限定エリア – パスワード認証</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
-      text-align: center;
-      padding: 3em 1em;
-    }
-    .notice {
-      background-color: #6ab075;
-      color: white;
-      padding: 1.5em;
-      margin: 0 auto 2em;
-      max-width: 600px;
-      font-size: 1.1em;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      line-height: 1.6;
-    }
-    .pw-box {
-      margin: 0 auto;
-      max-width: 600px;
-    }
-    input[type="text"] {
-      padding: 0.5em;
-      font-size: 1em;
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 0.5em 1.2em;
-      font-size: 1em;
-      background-color: #6ab075;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-left: 1em;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #5aa268;
-    }
-  </style>
-</head>
-<body>
+<script>
+function myEnter(){
+  var password = prompt("パスワードを入力してください:");
+  if (!password) return;
 
-  <div class="notice">
-    <strong>ここから先は同期生限定エリアです。</strong><br>
-    （ヒント：以前と同じ虫と数字）<br><br>
-    パスワードがわからない場合は管理人までお問い合わせください。<br>
-    エラー時はブラウザーの戻るボタンでお戻りください。
-  </div>
+  // 絶対パスでGitHub Pagesの正しいURLにアクセス（セキュリティ目的でパスワードは直接使わない）
+  var tokenURL = "https://samkoba7.github.io/fukashi21/pw_protect/" + encodeURIComponent(password) + ".html";
 
-  <div class="pw-box">
-    <input type="text" id="pw" placeholder="パスワードを入力">
-    <button onclick="checkPassword()">送信</button>
-  </div>
-
-  <script>
-    // クエリパラメータ 'target' で遷移先を受け取る
-    const params = new URLSearchParams(location.search);
-    // パラメータがなければデフォルトは 同期生エリアトップ(pw_protect.html)
-    const target = params.get('target') || 'pw_protect.html';
-
-    function checkPassword() {
-      const pw = document.getElementById("pw").value.trim().toLowerCase();
-      if (pw === "album" ||
-          pw === "essay" ||
-          pw === "news" ||
-          pw === "nishiho" ||
-          pw === "others" ||
-          pw === "reunion" ||
-          pw === "thread" ||
-          pw === "tombo21") {
-        // パスワードが正しければ、query で指定されたページへ
-        location.href = target;
-      } else {
-        alert("パスワードが間違っています。");
+  fetch(tokenURL)
+    .then(response => {
+      if (!response.ok) {
+        alert("認証に失敗しました。");
+        throw new Error("Not Found");
       }
-    }
-  </script>
-
-  <noscript>
-    JavaScriptを有効にしてください。
-  </noscript>
-
-</body>
-</html>
+      return response.text();
+    })
+    .then(() => {
+      // 正しいパスワードなら転送（分岐ケース対応）
+      switch (password) {
+        case "album":
+        case "essay":
+        case "news":
+        case "nishiho":
+        case "others":
+        case "reunion":
+        case "thread":
+          location.href = "../" + password + "/index.html";
+          break;
+        case "tombo21":
+          location.href = "https://samkoba7.github.io/fukashi21/tombo21.html";
+          break;
+        default:
+          alert("正しいページが指定されていません。");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("エラーが発生しました。");
+    });
+}
+</script>
