@@ -49,18 +49,12 @@
   <script>
     function checkPassword() {
       const pw = document.getElementById("pw").value.trim();
+      const folder = window.location.pathname.split("/").filter(x => x)[0];
+
+      // 
       if (pw === "tombo21") {
-        const path = window.location.pathname;
-
-        let target = "/fukashi21/tombo21.html"; // デフォルト
-
-        if (path.includes("news")) {
-          target = "/fukashi21/news.html";
-        } else if (path.includes("essay")) {
-          target = "/fukashi21/essay.html";
-        }
-
-        location.href = target;
+        // ページ名はフォルダ名.html と一致させておく（例：essay → essay.html）
+        window.location.href = "/fukashi21/" + folder + ".html";
       } else {
         alert("正しいパスワードを入力してください");
       }
