@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>パスワード認証</title>
+  <title>同期生限定エリア – パスワード認証</title>
   <style>
     body {
       font-family: sans-serif;
@@ -49,10 +49,10 @@
 </head>
 <body>
   <div class="notice">
-    <strong>ここから先はパスワード要エリアです。</strong><br>
+    <strong>ここから先は同期生限定エリアです。</strong><br>
     （ヒント：以前と同じ虫と数字）<br><br>
-    パスワードのわからない人はホームページ管理人まで問い合わせてください。<br>
-    エラーの場合はブラウザーの戻るボタン（←）で戻ってください。
+    パスワードがわからない場合は管理人までお問い合わせください。<br>
+    エラー時はブラウザーの戻るボタンでお戻りください。
   </div>
 
   <div class="pw-box">
@@ -60,35 +60,43 @@
     <button onclick="checkPassword()">送信</button>
   </div>
 
-  <noscript>JavaScriptを有効にしてください。</noscript>
-
   <script>
     function checkPassword() {
-      const input = document.getElementById("pw").value.trim();
-      if (input !== "tombo21") {
-        alert("パスワードが違います。");
-        return;
+      const pw = document.getElementById("pw").value.trim().toLowerCase();
+
+      switch (pw) {
+        case "album":
+          location.href = "album/index.html";
+          break;
+        case "essay":
+          location.href = "essay/index.html";
+          break;
+        case "news":
+          location.href = "news/index.html";
+          break;
+        case "nishiho":
+          location.href = "nishiho/index.html";
+          break;
+        case "others":
+          location.href = "others/index.html";
+          break;
+        case "reunion":
+          location.href = "reunion/index.html";
+          break;
+        case "thread":
+          location.href = "thread/index.html";
+          break;
+        case "tombo21":
+          location.href = "tombo21.html";
+          break;
+        default:
+          alert("パスワードが間違っています。");
       }
-
-      // fukashi21/pw_protect/index.html → root = fukashi21
-      const pathParts = window.location.pathname.split("/").filter(Boolean);
-      const root = pathParts[0];          // 'fukashi21'
-      const currentDir = pathParts[1];    // 'pw_protect'
-
-      // トークンファイルの存在チェック（HEADで）
-      fetch(`/${root}/pw_protect/tombo21.html`, { method: 'HEAD' })
-        .then(res => {
-          if (!res.ok) throw new Error();
-
-          // 自分がルートindexなら → pw_protect.html
-          // サブディレクトリindexなら → essay.html / news.html など
-          const target = `${currentDir}.html`;
-          window.location.href = `/${root}/${target}`;
-        })
-        .catch(() => {
-          alert("認証エラー：保護ファイルが見つかりません。");
-        });
     }
   </script>
+
+  <noscript>
+    JavaScriptを有効にしてください。
+  </noscript>
 </body>
 </html>
