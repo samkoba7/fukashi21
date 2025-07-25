@@ -1,41 +1,22 @@
-<script>
-function myEnter(){
-  var password = prompt("パスワードを入力してください:");
-  if (!password) return;
-
-  // 絶対パスでGitHub Pagesの正しいURLにアクセス（セキュリティ目的でパスワードは直接使わない）
-  var tokenURL = "https://samkoba7.github.io/fukashi21/pw_protect/" + encodeURIComponent(password) + ".html";
-
-  fetch(tokenURL)
-    .then(response => {
-      if (!response.ok) {
-        alert("認証に失敗しました。");
-        throw new Error("Not Found");
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>同期会パスワード認証</title>
+  <script type="text/javascript">
+    function myEnter() {
+      var myPassWord = prompt("パスワードを入力してください", "");
+      if (myPassWord !== "" && myPassWord !== null) {
+        if (myPassWord === "tombo21") {
+          location.href = "tombo21.html";
+        } else {
+          alert("パスワードが違います。");
+        }
       }
-      return response.text();
-    })
-    .then(() => {
-      // 正しいパスワードなら転送（分岐ケース対応）
-      switch (password) {
-        case "album":
-        case "essay":
-        case "news":
-        case "nishiho":
-        case "others":
-        case "reunion":
-        case "thread":
-          location.href = "../" + password + "/index.html";
-          break;
-        case "tombo21":
-          location.href = "https://samkoba7.github.io/fukashi21/tombo21.html";
-          break;
-        default:
-          alert("正しいページが指定されていません。");
-      }
-    })
-    .catch(err => {
-      console.error(err);
-      alert("エラーが発生しました。");
-    });
-}
-</script>
+    }
+  </script>
+</head>
+<body onload="myEnter()">
+  <noscript>JavaScriptを有効にしてください。</noscript>
+</body>
+</html>
