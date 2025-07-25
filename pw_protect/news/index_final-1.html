@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>同期会 PW 認証</title>
+  <script>
+    window.onload = async function() {
+      const input = prompt("パスワードを入力してください:");
+      if (!input || !input.trim()) {
+        alert("パスワードが入力されませんでした。");
+        return;
+      }
+      const pw = input.trim();
+      const tokenFile = encodeURIComponent(pw) + ".html";
+
+      try {
+        const res = await fetch(tokenFile, { method: "HEAD" });
+        if (res.ok) {
+          // ✅ 現在のフォルダー名を取得し、それに応じた遷移先へ
+          const pathParts = window.location.pathname.split("/");
+          const folderName = pathParts[pathParts.length - 2]; // 例: essay
+          const targetPage = "../" + folderName + ".html";
+          location.href = targetPage;
+        } else {
+          alert("パスワードが違います。");
+        }
+      } catch (e) {
+        alert("認証時にエラーが発生しました。");
+      }
+    };
+  </script>
+</head>
+<body>
+  <noscript>JavaScript を有効にしてください。</noscript>
+</body>
+</html>
