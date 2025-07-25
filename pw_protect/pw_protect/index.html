@@ -2,35 +2,99 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>同期会 PW 認証</title>
+  <title>パスワード認証</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f9f9f9;
+      text-align: center;
+      padding: 3em 1em;
+    }
+    .notice {
+      background-color: #6ab075;
+      color: white;
+      padding: 1.5em;
+      margin: 0 auto 2em;
+      max-width: 600px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      line-height: 1.6;
+    }
+    .pw-box {
+      margin: 0 auto;
+      max-width: 600px;
+    }
+    input[type="text"] {
+      padding: 0.5em;
+      font-size: 1em;
+      width: 200px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 0.5em 1.2em;
+      font-size: 1em;
+      background-color: #6ab075;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-left: 1em;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #5aa268;
+    }
+  </style>
   <script>
-    window.onload = async function() {
-      const input = prompt("パスワードを入力してください:");
-      if (!input || !input.trim()) {
+    async function checkPassword() {
+      const inputEl = document.getElementById("pw");
+      const raw = inputEl.value;
+      if (!raw || !raw.trim()) {
         alert("パスワードが入力されませんでした。");
         return;
       }
-      const pw = input.trim();
+      const pw = raw.trim();
       const tokenFile = encodeURIComponent(pw) + ".html";
 
       try {
         const res = await fetch(tokenFile, { method: "HEAD" });
         if (res.ok) {
-          // ✅ 現在のフォルダー名を取得し、それに応じた遷移先へ
-          const pathParts = window.location.pathname.split("/");
-          const folderName = pathParts[pathParts.length - 2]; // 例: essay
-          const targetPage = "../" + folderName + ".html";
-          location.href = targetPage;
+          // 動的にフォルダー名を取得し遷移先を決定
+          const parts = window.location.pathname.split("/");
+          const folder = parts[parts.length - 2];
+          location.href = "../" + folder + ".html";
         } else {
           alert("パスワードが違います。");
         }
       } catch (e) {
         alert("認証時にエラーが発生しました。");
+        console.error(e);
       }
-    };
+    }
+
+    // Enterキーでも送信できるように
+    document.addEventListener("DOMContentLoaded", () => {
+      const pwInput = document.getElementById("pw");
+      pwInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") checkPassword();
+      });
+    });
   </script>
 </head>
 <body>
-  <noscript>JavaScript を有効にしてください。</noscript>
+  <div class="notice">
+    <strong>ここから先はパスワード要エリアです。</strong><br>
+    （ヒント：以前と同じ虫と数字）<br><br>
+    パスワードのわからない人はホームページ管理人まで問い合わせてください。<br>
+    エラーの場合はブラウザーの戻るボタン（←）で戻ってください。
+  </div>
+
+  <div class="pw-box">
+    <input type="text" id="pw" placeholder="パスワードを入力">
+    <button onclick="checkPassword()">送信</button>
+  </div>
+
+  <noscript>JavaScriptを有効にしてください。</noscript>
 </body>
 </html>
