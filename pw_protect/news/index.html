@@ -22,7 +22,7 @@
         const res = await fetch(tokenFile, { method: "HEAD" });
         if (res.ok) {
           // 3. 存在確認OK → news.html へ遷移
-          location.href = "news.html";
+         location.href = "../news.html";
         } else {
           // 404など
           alert("パスワードが違います。");
