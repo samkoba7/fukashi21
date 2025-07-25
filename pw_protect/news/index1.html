@@ -38,3 +38,45 @@
   <noscript>JavaScript を有効にしてください。</noscript>
 </body>
 </html>
+=======
+ <!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>同期会 PW 認証</title>
+  <script>
+    window.onload = async function() {
+      // 1. ユーザーにPWを入力させる
+      const input = prompt("パスワードを入力してください:");
+      if (!input || !input.trim()) {
+        alert("パスワードが入力されませんでした。");
+        return;
+      }
+      const pw = input.trim();
+
+      // 2. トークンファイル名を生成
+      //    ・同じフォルダー内に「<pw>.html」があるか確かめる
+      //    ・HEADリクエストならファイル取得量を抑えられる
+      const tokenFile = encodeURIComponent(pw) + ".html";
+
+      try {
+        const res = await fetch(tokenFile, { method: "HEAD" });
+        if (res.ok) {
+          // 3. 存在確認OK → news.html へ遷移
+          location.href = "news.html";
+        } else {
+          // 404など
+          alert("パスワードが違います。");
+        }
+      } catch (e) {
+        // ネットワークエラー等
+        alert("認証時にエラーが発生しました。");
+      }
+    };
+  </script>
+</head>
+<body>
+  <noscript>JavaScript を有効にしてください。</noscript>
+</body>
+</html>
+>>>>>>> 0297725 (2回目の更新：新しいファイルを追加)

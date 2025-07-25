@@ -2,92 +2,39 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>同期生限定エリア – パスワード認証</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f9f9f9;
-      text-align: center;
-      padding: 3em 1em;
-    }
-    .notice {
-      background-color: #6ab075;
-      color: white;
-      padding: 1.5em;
-      margin: 0 auto 2em;
-      max-width: 600px;
-      font-size: 1.1em;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      line-height: 1.6;
-    }
-    .pw-box {
-      margin: 0 auto;
-      max-width: 600px;
-    }
-    input[type="text"] {
-      padding: 0.5em;
-      font-size: 1em;
-      width: 200px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 0.5em 1.2em;
-      font-size: 1em;
-      background-color: #6ab075;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      margin-left: 1em;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #5aa268;
-    }
-  </style>
+  <title>同期会 PW 認証</title>
+  <script>
+    window.onload = async function() {
+      // 1. ユーザーにPWを入力させる
+      const input = prompt("パスワードを入力してください:");
+      if (!input || !input.trim()) {
+        alert("パスワードが入力されませんでした。");
+        return;
+      }
+      const pw = input.trim();
+
+      // 2. トークンファイル名を生成
+      //    ・同じフォルダー内に「<pw>.html」があるか確かめる
+      //    ・HEADリクエストならファイル取得量を抑えられる
+      const tokenFile = encodeURIComponent(pw) + ".html";
+
+      try {
+        const res = await fetch(tokenFile, { method: "HEAD" });
+        if (res.ok) {
+          // 3. 存在確認OK → news.html へ遷移
+         location.href = "../news.html";
+        } else {
+          // 404など
+          alert("パスワードが違います。");
+        }
+      } catch (e) {
+        // ネットワークエラー等
+        alert("認証時にエラーが発生しました。");
+      }
+    };
+  </script>
 </head>
 <body>
-
-  <div class="notice">
-    <strong>ここから先は同期生限定エリアです。</strong><br>
-    （ヒント：以前と同じ虫と数字）<br><br>
-    パスワードがわからない場合は管理人までお問い合わせください。<br>
-    エラー時はブラウザーの戻るボタンでお戻りください。
-  </div>
-
-  <div class="pw-box">
-    <input type="text" id="pw" placeholder="パスワードを入力">
-    <button onclick="checkPassword()">送信</button>
-  </div>
-
-  <script>
-    // クエリパラメータ 'target' で遷移先を受け取る
-    const params = new URLSearchParams(location.search);
-    // パラメータがなければデフォルトは 同期生エリアトップ(pw_protect.html)
-    const target = params.get('target') || 'pw_protect.html';
-
-    function checkPassword() {
-      const pw = document.getElementById("pw").value.trim().toLowerCase();
-      if (pw === "album" ||
-          pw === "essay" ||
-          pw === "news" ||
-          pw === "nishiho" ||
-          pw === "others" ||
-          pw === "reunion" ||
-          pw === "thread" ||
-          pw === "tombo21") {
-        // パスワードが正しければ、query で指定されたページへ
-        location.href = target;
-      } else {
-        alert("パスワードが間違っています。");
-      }
-    }
-  </script>
-
-  <noscript>
-    JavaScriptを有効にしてください。
-  </noscript>
-
+  <noscript>JavaScript を有効にしてください。</noscript>
 </body>
 </html>
