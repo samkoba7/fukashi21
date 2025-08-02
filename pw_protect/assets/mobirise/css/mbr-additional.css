@@ -739,7 +739,7 @@ a {
 .cid-uRGrJD5Vcq .mbr-section-title {
   text-align: left;
 }
-.cid-uSfqm96oj2 {
+.cid-uSIQSXFWCg {
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #232323;
@@ -826,7 +826,7 @@ a {
     padding: 0 2rem;
   }
 }
-.cid-uSfqbkbZp7 {
+.cid-uSIQSXFWCg {
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #232323;
@@ -968,7 +968,94 @@ a {
 .cid-uRy1gNXGBG .item-subtitle {
   text-align: left;
 }
-.cid-uRy56zUNCN {
+.cid-uSIQSXFWCg {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background-color: #232323;
+  overflow: hidden;
+}
+.cid-uSIRrI4Zaj {
+  display: flex;
+  padding-top: 45px;
+  padding-bottom: 0px;
+  background-image: url("../../../assets/images/004-1024x768.jpg");
+}
+.cid-uSIRrI4Zaj .mbr-overlay {
+  background-color: #353535;
+  opacity: 0.5;
+}
+.cid-uSIRrI4Zaj .content-wrap {
+  padding: 5rem 1rem;
+}
+@media (min-width: 768px) {
+  .cid-uSIRrI4Zaj {
+    align-items: flex-start;
+  }
+  .cid-uSIRrI4Zaj .row {
+    justify-content: flex-start;
+  }
+  .cid-uSIRrI4Zaj .content-wrap {
+    width: 100%;
+  }
+}
+@media (max-width: 991px) and (min-width: 768px) {
+  .cid-uSIRrI4Zaj .content-wrap {
+    min-width: 50%;
+  }
+}
+@media (max-width: 767px) {
+  .cid-uSIRrI4Zaj {
+    -webkit-align-items: center;
+    align-items: center;
+  }
+  .cid-uSIRrI4Zaj .mbr-row {
+    -webkit-justify-content: center;
+    justify-content: center;
+  }
+  .cid-uSIRrI4Zaj .content-wrap {
+    width: 100%;
+  }
+}
+.cid-uSIRrI4Zaj .mbr-section-title {
+  color: #e43f3f;
+  text-align: center;
+}
+.cid-uSIRrI4Zaj .mbr-text,
+.cid-uSIRrI4Zaj .mbr-section-btn {
+  color: #e43f3f;
+  text-align: center;
+}
+.cid-uSIRrIhpjy {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #ffb5b5;
+}
+.cid-uSIRrIhpjy .mbr-fallback-image.disabled {
+  display: none;
+}
+.cid-uSIRrIhpjy .mbr-fallback-image {
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.cid-uSIRrIhpjy .row {
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .cid-uSIRrIhpjy .image-wrapper {
+    padding: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .cid-uSIRrIhpjy .text-wrapper {
+    padding: 0 2rem;
+  }
+}
+.cid-uSIRrItuZf {
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #232323;
