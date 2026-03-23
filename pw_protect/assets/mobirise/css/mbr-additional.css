@@ -1066,15 +1066,15 @@ a {
 .cid-uRGlRWf62P H3 {
   color: #e43f3f;
 }
-.cid-uRGrJD5Vcq {
+.cid-veGSKHYQKP {
   padding-top: 0rem;
   padding-bottom: 0rem;
-  background-color: #98dee8;
+  background-color: #ffffff;
 }
-.cid-uRGrJD5Vcq .mbr-fallback-image.disabled {
+.cid-veGSKHYQKP .mbr-fallback-image.disabled {
   display: none;
 }
-.cid-uRGrJD5Vcq .mbr-fallback-image {
+.cid-veGSKHYQKP .mbr-fallback-image {
   display: block;
   background-size: cover;
   background-position: center center;
@@ -1083,20 +1083,53 @@ a {
   position: absolute;
   top: 0;
 }
-.cid-uRGrJD5Vcq .row {
+.cid-veGSKHYQKP .row {
   align-items: center;
 }
 @media (max-width: 991px) {
-  .cid-uRGrJD5Vcq .image-wrapper {
+  .cid-veGSKHYQKP .image-wrapper {
     padding: 1rem;
   }
 }
 @media (min-width: 992px) {
-  .cid-uRGrJD5Vcq .text-wrapper {
+  .cid-veGSKHYQKP .text-wrapper {
     padding: 0 2rem;
   }
 }
-.cid-uRGrJD5Vcq .mbr-section-title {
+.cid-veGSKHYQKP .mbr-section-title {
+  text-align: left;
+}
+.cid-veGSJaYy3B {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  background-color: #98dee8;
+}
+.cid-veGSJaYy3B .mbr-fallback-image.disabled {
+  display: none;
+}
+.cid-veGSJaYy3B .mbr-fallback-image {
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.cid-veGSJaYy3B .row {
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .cid-veGSJaYy3B .image-wrapper {
+    padding: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .cid-veGSJaYy3B .text-wrapper {
+    padding: 0 2rem;
+  }
+}
+.cid-veGSJaYy3B .mbr-section-title {
   text-align: left;
 }
 .cid-v7ucq1SzE1 {
@@ -1585,7 +1618,7 @@ a {
 .cid-v1RMpBkSfa {
   padding-top: 6rem;
   padding-bottom: 6rem;
-  background-color: #fff0b0;
+  background-color: #9fdbf8;
 }
 .cid-v1RMpBkSfa .mbr-fallback-image.disabled {
   display: none;
@@ -1609,6 +1642,36 @@ a {
 }
 @media (min-width: 992px) {
   .cid-v1RMpBkSfa .text-wrapper {
+    padding: 0 2rem;
+  }
+}
+.cid-veH9725i32 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  background-color: #fff0b0;
+}
+.cid-veH9725i32 .mbr-fallback-image.disabled {
+  display: none;
+}
+.cid-veH9725i32 .mbr-fallback-image {
+  display: block;
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
+.cid-veH9725i32 .row {
+  align-items: center;
+}
+@media (max-width: 991px) {
+  .cid-veH9725i32 .image-wrapper {
+    padding: 1rem;
+  }
+}
+@media (min-width: 992px) {
+  .cid-veH9725i32 .text-wrapper {
     padding: 0 2rem;
   }
 }
